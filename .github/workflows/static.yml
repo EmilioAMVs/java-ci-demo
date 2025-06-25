@@ -63,9 +63,19 @@ jobs:
         with:
           path: 'output'
 
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkstyle
+        run:
+          mvn checkstyle:checkstyle
+          cp -r target/site/* output/
+  
   # Job separado para el despliegue
   deploy:
-    needs: build  # Este job se ejecuta solo si el job "build" fue exitoso
+    needs: test  # Este job se ejecuta solo si el job "build" fue exitoso
     runs-on: ubuntu-latest
     environment:
       name: github-pages  # Define el entorno de despliegue para Pages
