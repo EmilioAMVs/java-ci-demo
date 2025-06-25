@@ -38,14 +38,19 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      # Paso 3: Compila el proyecto Java (solo chequea sintaxis y estructura)
-      - name: Compile Java project
-        run: mvn compile
-
-      # Paso 4: Ejecuta la clase Java que genera el archivo HTML
+      # Paso 3: Compila el proyecto Java y genera el HTML.
       # Este paso produce el contenido que se mostrará en GitHub Pages
-      - name: Generate static HTML with Java
-        run: mvn exec:java -Dexec.mainClass="com.example.Main"
+      - name: Compile and generate HTML
+        run: | 
+          mvn compile
+          mvn exec:java -Dexec.mainClass="com.example.Main"
+          
+      # Paso 4: Corre el checkstyle y copia el reporte generado
+      # Este paso produce el contenido que se mostrará en GitHub Pages
+      - name: Run checkstyle and copy the report
+        run: |
+          mvn checkstyle:checkstyle
+          cp -r target/site/* output/
 
       # Paso 5: Prepara GitHub Pages para recibir los archivos
       - name: Setup Pages
