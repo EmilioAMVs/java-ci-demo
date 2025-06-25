@@ -6,7 +6,7 @@ public class Main {
         try (PrintWriter w = new PrintWriter("output/index.html", "UTF-8")) {
             w.println("<h1>Hello from Java CI/CD!</h1>");
             w.println("<h2>Ver reporte checkstyle: </h2>");
-            w.println("<p><a href=\"checkstyle.html\">Ver reporte Checkstyle</a></p>");
+            w.println("<p><a href=\"checkstyle.html\">Reporte</a></p>");
             System.out.println("HTML generado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();

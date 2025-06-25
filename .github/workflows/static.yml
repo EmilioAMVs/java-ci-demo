@@ -68,6 +68,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Paso 1: Clona el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Paso 2: Instala Java 11 desde Temurin (recomendado por GitHub)
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
       - name: Checkstyle
         run:
           mvn checkstyle:checkstyle
